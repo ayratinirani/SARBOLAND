@@ -124,8 +124,10 @@ private  void remake()
                         // TODO Handle item click
                         Toast.makeText(getActivity(), MainActivity.MLOCATIONS.get(position).getPhone(), Toast.LENGTH_SHORT).show();
                         String phone = MainActivity.MLOCATIONS.get(position).getPhone();
-                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
-                        startActivity(intent);
+                        Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                        callIntent.setData(Uri.parse("tel:"+Uri.encode(phone.trim())));
+                        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(callIntent);
                     }
                 })
         );
