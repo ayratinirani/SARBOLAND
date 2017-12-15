@@ -1,10 +1,15 @@
 package ir.ounegh.vardast;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatAutoCompleteTextView;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.ListViewCompat;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -30,20 +35,22 @@ import retrofit2.Response;
 public class CatsFragment extends Fragment {
     ListViewCompat lv;
     int[]selectedcats;
+    RecyclerView mrc;
     AppCompatAutoCompleteTextView ato;
     ArrayList<Category> ctas;
     ArrayAdapter<Category>adapter;
+    Category selectedcat;
     ArrayAdapter<Mlocation>ladapter;
-    @Nullable
+
+ @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.catslayout,
                 container, false);
-        lv=(ListViewCompat) view.findViewById(R.id.catslistview);
         ato=(AppCompatAutoCompleteTextView) view.findViewById(R.id.autotext);
+        mrc=(RecyclerView)view.findViewById(R.id.mrecyc);
+        mrc.setLayoutManager(new LinearLayoutManager(getActivity()));
         getCats();
-
-
 
         return view;
 
@@ -51,41 +58,45 @@ public class CatsFragment extends Fragment {
     }
 private  void remake()
 {
-    ctas=VrdstApp.CATS;
+    ctas=MainActivity.CATS;
 
     if(ctas.size()>1) {
         ArrayAdapter<Category> madapter = new ArrayAdapter
                 (getActivity(), android.R.layout.select_dialog_item,ctas);
-        ato.setThreshold(1);
+        ato.setThreshold(0);
         ato.setAdapter(madapter);
         ato.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         //  Toast.makeText(getActivity(),ctas.toString(),Toast.LENGTH_LONG).show();
-                        VrdstApp.SECTEDCAT=ctas.get(i).getName();
-                        findLocs(VrdstApp.SECTEDCAT);
+                        selectedcat=(Category) adapterView.getItemAtPosition(i);
+                        String s=selectedcat.getName();
+                        findLocs(s);
+
                     }
                 }
         );
     }
 }
     private void findLocs(String s) {
+        getActivity().setTitle(s+" های اطراف اینجا");
+
         Map<String,String> map=new HashMap<>();
         map.put("category",s);
-        map.put("latitude",38.258536+"");
-        map.put("longiyude",38.258536+"");
-        VrdstApp.SELECTEDLOCATIONS=new ArrayList<>();
+        map.put("latitude",(MainActivity.getLocation().getLatitude())+"");
+        map.put("longitde",(MainActivity.getLocation().getLongitude())+"");
 
+       MainActivity.MLOCATIONS=new ArrayList<>();
         Call<List<Mlocation>> listCallcall=
                 VrdClient.getClient().create(VrdApi.class).getList(map);
       listCallcall.enqueue(new Callback<List<Mlocation>>() {
             @Override
             public void onResponse(Call<List<Mlocation>> call, Response<List<Mlocation>> response) {
-                Toast.makeText(getActivity(),response.body().toString(),Toast.LENGTH_LONG).show();
+               // Toast.makeText(getActivity(),response.body().toString(),Toast.LENGTH_LONG).show();
 
                 for(int i=0;i<response.body().size();i++){
-                    VrdstApp.SELECTEDLOCATIONS.add(response.body().get(i));
+                    MainActivity.MLOCATIONS.add(response.body().get(i));
 
                     refreshList();
                 }
@@ -97,59 +108,39 @@ private  void remake()
               t.printStackTrace();
             }
         });
-//        Call<String> stringCall = VrdClient.getClient().create(VrdApi.class).getStringResponse(map);
-//        stringCall.enqueue(new Callback<String>() {
-//            @Override
-//            public void onResponse(Call<String> call, Response<String> response) {
-//                if (response.isSuccessful()) {
-//                    String responseString = response.body();
-//                    // todo: do something with the response string
-//                    Toast.makeText(getActivity(),call.toString(),Toast.LENGTH_LONG).show();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<String> call, Throwable t) {
-//                Toast.makeText(getActivity(),"error: "+t.getLocalizedMessage(),Toast.LENGTH_LONG).show();
-//            }
-//        });
-
-
-
-
-
-
 
     }
-    private void refreshList(){
-        ladapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1,VrdstApp.SELECTEDLOCATIONS);
+    private void refreshList() {
 
-           lv.setAdapter(ladapter);
-           lv.setOnItemClickListener(
-
-                   new AdapterView.OnItemClickListener() {
-                       @Override
-                       public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                           String s= VrdstApp.SELECTEDLOCATIONS.get(i).getName();
-                           Toast.makeText(getActivity(),s,Toast.LENGTH_LONG).show();
-                       }
-                   }
-           );
-
+        final MlocationAdapter mAdapter = new MlocationAdapter(MainActivity.MLOCATIONS, getActivity());
+        mrc.setAdapter(mAdapter);
+        RecyclerView.ItemDecoration itemDecoration =
+                new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
+        mrc.addItemDecoration(itemDecoration);
+        mrc.addOnItemTouchListener(
+                new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        // TODO Handle item click
+                        Toast.makeText(getActivity(), MainActivity.MLOCATIONS.get(position).getPhone(), Toast.LENGTH_SHORT).show();
+                        String phone = MainActivity.MLOCATIONS.get(position).getPhone();
+                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                        startActivity(intent);
+                    }
+                })
+        );
     }
     public void getCats(){
-        VrdstApp.SECTEDCAT="";
+       selectedcat=null;
         Call<List<Category>> ccall=
                 VrdClient.getClient().create(VrdApi.class).getCats();
         ccall.enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-                Toast.makeText(getActivity(),response.body().toString(),Toast.LENGTH_LONG).show();
-                //   mTextMessage.setText(response.body().toString());
-                VrdstApp.CATS=new ArrayList<>();
+
+               MainActivity.CATS.clear();
                 for(int i=0;i<response.body().size();i++){
-                    VrdstApp.CATS.add(response.body().get(i));
+                   MainActivity.CATS.add(response.body().get(i));
                 }
                 remake();
             }

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#0099cc"
     android:layout_height="match_parent"
     android:orientation="vertical">
 <android.support.v7.widget.AppCompatAutoCompleteTextView
@@ -8,11 +11,14 @@
     android:hint="انتخاب نوع درخواست"
     android:layout_width="match_parent"
     android:layout_height="0dp"
+
     android:layout_weight="1"
     />
-    <android.support.v7.widget.ListViewCompat
-        android:id="@+id/catslistview"
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mrecyc"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="6"
-        android:layout_height="0dp"></android.support.v7.widget.ListViewCompat>
+        tools:listitem="@layout/item_loc"></android.support.v7.widget.RecyclerView>
 </android.support.v7.widget.LinearLayoutCompat>

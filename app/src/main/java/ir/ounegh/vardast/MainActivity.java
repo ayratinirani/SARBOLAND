@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -20,9 +21,11 @@ import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity {
+    public static final ArrayList<Category> CATS = new ArrayList<>();
     public static Location LOCATION;
     private TextView mTextMessage;
-
+    public  static String SECAT="";
+    public  static ArrayList<Mlocation>MLOCATIONS=new ArrayList<>();
     private FragmentManager fragmentManager;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -36,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
                     chaneFrag(ctfr);
                     return true;
                 case R.id.navigation_dashboard:
-
+                ListFragment lf=new ListFragment();
+                chaneFrag(lf);
                     mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_notifications:
@@ -46,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     };
-
+   static double longitude=0;
+  static   double latitude=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,17 +61,22 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager=getSupportFragmentManager();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        latitude=getIntent().getExtras().getDouble("latitude",36.0);
+        longitude=getIntent().getExtras().getDouble("longitude",54.04);
+       // Toast.makeText(this,latitude+"E"+longitude+"N",Toast.LENGTH_SHORT).show();
+        ListFragment lf=new ListFragment();
+        chaneFrag(lf);
         CatsFragment ctfr=new CatsFragment();
         chaneFrag(ctfr);
     }
 
 
-    public void starser(){
-        Intent intent = new Intent(this, MyIntentService.class);
-        intent.setAction("ir.ounegh.vardast.action.LOC");
-//        intent.putExtra(EXTRA_PARAM1, param1);
-//        intent.putExtra(EXTRA_PARAM2, param2);
-        startService(intent);
+    public static Location getLocation(){
+
+        Location l=new Location("gps");
+        l.setLatitude(latitude);
+        l.setLongitude(longitude);
+        return l;
     }
     public  void getList(String cat){}
 

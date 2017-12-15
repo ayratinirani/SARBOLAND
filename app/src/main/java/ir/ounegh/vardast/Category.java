@@ -21,4 +21,12 @@ public class Category {
     public String toString() {
         return getName();
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public  void setId(int id){
+        this.id=id;
+    }
 }

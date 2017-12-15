@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_marginTop="6dp"
+    android:background="@color/colorAccent"
+    android:layout_marginHorizontal="20dp"
+    >
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="5dp"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/item_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginRight="10dp"
+        android:paddingBottom="5dp"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/item_cat"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginRight="10dp"
+        android:paddingBottom="5dp"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#fff" />
+
+    <ImageView
+        android:id="@+id/item_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</android.support.v7.widget.LinearLayoutCompat>
