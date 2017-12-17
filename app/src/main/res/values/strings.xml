@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">vardast</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">وردست</string>
+    <string name="title_home">صفحه اصلی</string>
+    <string name="title_dashboard">راهنما</string>
+    <string name="title_notifications">درباره ما</string>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>

@@ -50,8 +50,7 @@ public class CatsFragment extends Fragment {
         ato=(AppCompatAutoCompleteTextView) view.findViewById(R.id.autotext);
         mrc=(RecyclerView)view.findViewById(R.id.mrecyc);
         mrc.setLayoutManager(new LinearLayoutManager(getActivity()));
-        getCats();
-
+        remake();
         return view;
 
 
@@ -131,30 +130,30 @@ private  void remake()
                 })
         );
     }
-    public void getCats(){
-       selectedcat=null;
-        Call<List<Category>> ccall=
-                VrdClient.getClient().create(VrdApi.class).getCats();
-        ccall.enqueue(new Callback<List<Category>>() {
-            @Override
-            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-
-               MainActivity.CATS.clear();
-                for(int i=0;i<response.body().size();i++){
-                   MainActivity.CATS.add(response.body().get(i));
-                }
-                remake();
-            }
-
-            @Override
-            public void onFailure(Call<List<Category>> call, Throwable t) {
-                Toast.makeText(getActivity(),"error"+call.toString(),Toast.LENGTH_LONG).show();
-            }
-        });
-
-
-
-    }
+//    public void getCats(){
+//       selectedcat=null;
+//        Call<List<Category>> ccall=
+//                VrdClient.getClient().create(VrdApi.class).getCats();
+//        ccall.enqueue(new Callback<List<Category>>() {
+//            @Override
+//            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+//
+//               MainActivity.CATS.clear();
+//                for(int i=0;i<response.body().size();i++){
+//                   MainActivity.CATS.add(response.body().get(i));
+//                }
+//                remake();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Category>> call, Throwable t) {
+//                Toast.makeText(getActivity(),"error"+call.toString(),Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//
+//
+//    }
 
 
 

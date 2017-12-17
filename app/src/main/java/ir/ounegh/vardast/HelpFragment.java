@@ -11,11 +11,11 @@ import android.view.ViewGroup;
  * Created by aseme on 13/12/2017.
  */
 
-public class ListFragment extends Fragment {
+public class HelpFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.catslayout,
+        View view = inflater.inflate(R.layout.about,
                 container, false);
         return view;
     }
