@@ -121,8 +121,7 @@ private  void remake()
                 new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        // TODO Handle item click
-                        Toast.makeText(getActivity(), MainActivity.MLOCATIONS.get(position).getPhone(), Toast.LENGTH_SHORT).show();
+
                         String phone = MainActivity.MLOCATIONS.get(position).getPhone();
                         Intent callIntent = new Intent(Intent.ACTION_DIAL);
                         callIntent.setData(Uri.parse("tel:"+Uri.encode(phone.trim())));

@@ -55,7 +55,7 @@ public class MCategoryAdapter extends BaseAdapter {
         TextView textViewItemName = (TextView)
                 convertView.findViewById(R.id.item_cat_name);
         ImageButton img=convertView.findViewById(R.id.item_cat_image);
-        img.setImageResource(R.drawable.ic_dashboard_black_24dp);
+        img.setImageResource(R.drawable.ic_dashboard_black_24dp );
 
         //sets the text for item name and item description from the current item object
         textViewItemName.setText(currentItem.getName());

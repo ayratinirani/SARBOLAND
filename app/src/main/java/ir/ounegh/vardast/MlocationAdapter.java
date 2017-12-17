@@ -49,8 +49,8 @@ public class MlocationAdapter extends Adapter<MlocationAdapter.Mviewholder>{
     public void onBindViewHolder(Mviewholder holder, int position) {
         holder.txname.setText(items.get(position).getName());
         holder.txphone.setText(items.get(position).getPhone());
-        holder.txcat.setText(items.get(position).getCategory());
-        holder.imglogo.setImageResource(R.drawable.ic_launcher_background);
+      //  holder.txcat.setText(items.get(position).getCategory());
+       // holder.imglogo.setImageResource();
 
     }
 
@@ -73,9 +73,9 @@ public class MlocationAdapter extends Adapter<MlocationAdapter.Mviewholder>{
         public Mviewholder(View itemView) {
             super(itemView);
             txname=itemView.findViewById(R.id.item_name);
-            txcat=itemView.findViewById(R.id.item_cat);
+          //  txcat=itemView.findViewById(R.id.item_cat);
             txphone=itemView.findViewById(R.id.item_phone);
-            imglogo=itemView.findViewById(R.id.item_logo);
+          // imglogo=itemView.findViewById(R.id.item_logo);
         }
 
          public void onClick(View v) {
