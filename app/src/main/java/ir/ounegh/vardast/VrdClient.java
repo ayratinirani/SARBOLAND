@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class VrdClient {
 
-    public  static final String BASE_URL = "http://ounegh.ir/nazdik/";
+    public  static final String BASE_URL = "http://192.168.1.11/vardast/api1/";
     private static Retrofit retrofit = null;
 
 

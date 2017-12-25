@@ -50,12 +50,13 @@ public class MCategoryAdapter extends BaseAdapter {
 
         // get current item to be displayed
         Category currentItem = (Category) getItem(i);
-
+        int resID = context.getResources().getIdentifier(Venum.icons.get(currentItem.getName()),
+                "drawable", context.getPackageName());
         // get the TextView for item name and item description
         TextView textViewItemName = (TextView)
                 convertView.findViewById(R.id.item_cat_name);
         ImageButton img=convertView.findViewById(R.id.item_cat_image);
-        img.setImageResource(R.drawable.ic_dashboard_black_24dp );
+        img.setImageResource(resID);
 
         //sets the text for item name and item description from the current item object
         textViewItemName.setText(currentItem.getName());

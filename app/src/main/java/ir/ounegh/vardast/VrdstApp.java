@@ -13,12 +13,12 @@ import java.util.ArrayList;
  */
 
 public class VrdstApp extends Application {
-    public  static String APPNAME="vardast";
-    public static ArrayList<Mlocation>SELECTEDLOCATIONS=new ArrayList<>();
+    public  static volatile String APPNAME="vardast";
+    public static volatile ArrayList<Mlocation>SELECTEDLOCATIONS=new ArrayList<>();
     public static  String BASEURL="https://ounegh.ir/nazdik/";
-    public static SharedPreferences PREFS;
+    public static  volatile SharedPreferences PREFS;
     public  static String SECTEDCAT="";
-    public  static Context CONTEXT;
+    public  static volatile Context CONTEXT;
    public static ArrayList<Category>CATS=new ArrayList<>();
     public static Location APPLOCATION=null;
     @Override
@@ -26,6 +26,7 @@ public class VrdstApp extends Application {
         super.onCreate();
         this.CONTEXT=getApplicationContext();
         PREFS=getApplicationContext().getSharedPreferences(APPNAME,0);
+
     }
 
 

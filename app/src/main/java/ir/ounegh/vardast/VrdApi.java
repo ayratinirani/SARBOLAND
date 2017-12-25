@@ -15,13 +15,9 @@ import retrofit2.http.POST;
 
 public interface VrdApi {
     @FormUrlEncoded
-    @POST("getlist.php")
+    @POST("list")
     Call<List<Mlocation>> getList(@FieldMap Map<String,String >params);
 
-    @GET("getcats.php")
+    @GET("cats")
     Call<List<Category>> getCats();
-
-    @FormUrlEncoded
-    @POST("getlist.php")
-    Call<String> getStringResponse(@FieldMap Map<String,String>params);
 }

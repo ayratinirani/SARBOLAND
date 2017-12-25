@@ -12,6 +12,34 @@ public class Mlocation  {
   String category;
   int id;
 
+  public double getDistance() {
+    return distance;
+  }
+
+  public void setDistance(double distance) {
+    this.distance = distance;
+  }
+
+  public int getVijeh() {
+    return vijeh;
+  }
+
+  public void setVijeh(int vijeh) {
+    this.vijeh = vijeh;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  private double distance;
+
+  private int vijeh;
+  private String address;
   public int getActive() {
     return active;
   }

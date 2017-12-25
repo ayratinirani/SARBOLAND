@@ -1,6 +1,7 @@
 package ir.ounegh.vardast;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
@@ -51,7 +52,10 @@ public class MlocationAdapter extends Adapter<MlocationAdapter.Mviewholder>{
         holder.txphone.setText(items.get(position).getPhone());
       //  holder.txcat.setText(items.get(position).getCategory());
        // holder.imglogo.setImageResource();
-
+  if(items.get(position).getVijeh()>0){
+        holder.vg.setBackgroundColor(Color.YELLOW);
+        holder.txname.append(" "+"‍‍‍پیشنهاد ویژه");
+        }
     }
 
    private void setlogos(){
@@ -70,12 +74,15 @@ public class MlocationAdapter extends Adapter<MlocationAdapter.Mviewholder>{
          ImageView imglogo;
          TextView txcat;
          TextView txphone;
+         ViewGroup vg;
         public Mviewholder(View itemView) {
             super(itemView);
             txname=itemView.findViewById(R.id.item_name);
-          //  txcat=itemView.findViewById(R.id.item_cat);
+          //txcat=itemView.findViewById(R.id.item_cat);
             txphone=itemView.findViewById(R.id.item_phone);
+            vg=itemView.findViewById(R.id.itengruop);
           // imglogo=itemView.findViewById(R.id.item_logo);
+
         }
 
          public void onClick(View v) {

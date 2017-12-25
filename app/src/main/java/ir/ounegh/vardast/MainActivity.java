@@ -119,7 +119,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+   private void fillVenom(){
+        Venum.icons.put("فست فود","ic_local_pizza_amber_600_24dp");
+       Venum.icons.put("رستوران","ic_local_restaurant_amber_600_24dp");
+       Venum.icons.put("تعمیرگاه","ic_local_pizza_amber_600_24dp");
+       Venum.icons.put("بانک","ic_local_pizza_amber_600_24dp");
+       Venum.icons.put("آژانس","ic_local_pizza_amber_600_24dp");
+       Venum.icons.put("سوپرمارکت","ic_local_pizza_amber_600_24dp") ;
+   }
 
 
 

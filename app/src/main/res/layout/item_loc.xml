@@ -11,6 +11,7 @@
     >
 
     <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/itengruop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#177556">
@@ -24,7 +25,7 @@
             android:paddingBottom="5dp"
             android:text="Small Text"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#e083a3" />
+            android:textColor="#fff" />
 
         <TextView
             android:id="@+id/item_name"
@@ -35,7 +36,7 @@
             android:paddingTop="5dp"
             android:text="Large Text"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#e083a3" />
+            android:textColor="#fff" />
     </android.support.v7.widget.LinearLayoutCompat>
 
     <android.support.v7.widget.LinearLayoutCompat
