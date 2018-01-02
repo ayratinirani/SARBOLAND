@@ -130,7 +130,7 @@ public class FullscreenActivity extends AppCompatActivity implements LocationLis
 
         removeUpdatesLocListener();
         startActivity(new Intent(this,MainActivity.class).putExtra("latitude",location.getLatitude()).putExtra("longitude",location.getLongitude()));
-
+       finish();
     }
 
 

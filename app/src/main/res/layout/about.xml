@@ -2,16 +2,21 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <TextView
         android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:keepScreenOn="true"
-        android:text="انتظار برای مکان شما"
+        android:text="انتخاب سرور"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#33b5e5"
         android:textSize="20sp"
         android:textStyle="bold" />
 
+    </android.support.v7.widget.LinearLayoutCompat>
 </android.support.constraint.ConstraintLayout>

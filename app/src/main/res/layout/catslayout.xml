@@ -3,16 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#0099cc"
+    android:background="@drawable/bg"
     android:gravity="center_vertical"
     android:layout_height="match_parent"
     android:orientation="vertical">
 <android.support.v7.widget.AppCompatAutoCompleteTextView
+    android:layout_marginTop="10dp"
     android:id="@+id/autotext"
     android:hint="انتخاب نوع درخواست"
     android:layout_width="match_parent"
     android:layout_height="0dp"
-
+    android:textColor="#fff"
+    android:textColorHint="#ff0000"
     android:layout_weight="1"
     />
 
@@ -21,5 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="6"
+        android:layoutAnimation="@anim/layout_animation_fall"
         tools:listitem="@layout/item_loc"></android.support.v7.widget.RecyclerView>
 </android.support.v7.widget.LinearLayoutCompat>

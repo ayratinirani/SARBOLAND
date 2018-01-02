@@ -93,17 +93,18 @@ private  void remake()
             @Override
             public void onResponse(Call<List<Mlocation>> call, Response<List<Mlocation>> response) {
                // Toast.makeText(getActivity(),response.body().toString(),Toast.LENGTH_LONG).show();
-
+                  if(response.isSuccessful()){
                 for(int i=0;i<response.body().size();i++){
                     MainActivity.MLOCATIONS.add(response.body().get(i));
-
                     refreshList();
-                }
+                }}else {
+                      Toast.makeText(getActivity(),response.message(),Toast.LENGTH_LONG).show();
+                  }
             }
 
             @Override
             public void onFailure(Call<List<Mlocation>> call, Throwable t) {
-                Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"failure"+t.getMessage(),Toast.LENGTH_LONG).show();
               t.printStackTrace();
             }
         });
@@ -130,30 +131,7 @@ private  void remake()
                 })
         );
     }
-//    public void getCats(){
-//       selectedcat=null;
-//        Call<List<Category>> ccall=
-//                VrdClient.getClient().create(VrdApi.class).getCats();
-//        ccall.enqueue(new Callback<List<Category>>() {
-//            @Override
-//            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-//
-//               MainActivity.CATS.clear();
-//                for(int i=0;i<response.body().size();i++){
-//                   MainActivity.CATS.add(response.body().get(i));
-//                }
-//                remake();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Category>> call, Throwable t) {
-//                Toast.makeText(getActivity(),"error"+call.toString(),Toast.LENGTH_LONG).show();
-//            }
-//        });
-//
-//
-//
-//    }
+
 
 
 

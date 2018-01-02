@@ -53,7 +53,7 @@ public class MlocationAdapter extends Adapter<MlocationAdapter.Mviewholder>{
       //  holder.txcat.setText(items.get(position).getCategory());
        // holder.imglogo.setImageResource();
   if(items.get(position).getVijeh()>0){
-        holder.vg.setBackgroundColor(Color.YELLOW);
+        holder.vg.setBackgroundColor(context.getResources().getColor(R.color.colorgold));
         holder.txname.append(" "+"‍‍‍پیشنهاد ویژه");
         }
     }

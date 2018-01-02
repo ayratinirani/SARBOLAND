@@ -7,6 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -28,34 +29,34 @@ public class MainActivity extends AppCompatActivity {
     public  static String SECAT="";
     public  static ArrayList<Mlocation>MLOCATIONS=new ArrayList<>();
     private FragmentManager fragmentManager;
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                   // mTextMessage.setText(R.string.title_home);
-                    if(CATS.size()<1){
-                        return false;
-                    }
-                    CatsFragment ctfr=new CatsFragment();
-                    chaneFrag(ctfr);
-                    return true;
-                case R.id.navigation_dashboard:
-             HelpFragment hp= new HelpFragment();
-             chaneFrag(hp);
-                 //   mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                //    mTextMessage.setText(R.string.title_notifications);
-                    AboutFragment lf=new AboutFragment();
-                    chaneFrag(lf);
-                    return true;
-            }
-            return false;
-        }
-    };
+//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+//            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+//
+//        @Override
+//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//            switch (item.getItemId()) {
+//                case R.id.navigation_home:
+//                   // mTextMessage.setText(R.string.title_home);
+//                    if(CATS.size()<1){
+//                        return false;
+//                    }
+//                    CatsFragment ctfr=new CatsFragment();
+//                    chaneFrag(ctfr);
+//                    return true;
+//                case R.id.navigation_dashboard:
+//             HelpFragment hp= new HelpFragment();
+//             chaneFrag(hp);
+//                 //   mTextMessage.setText(R.string.title_dashboard);
+//                    return true;
+//                case R.id.navigation_notifications:
+//                //    mTextMessage.setText(R.string.title_notifications);
+//                    AboutFragment lf=new AboutFragment();
+//                    chaneFrag(lf);
+//                    return true;
+//            }
+//            return false;
+//        }
+//    };
    static double longitude=0;
   static   double latitude=0;
   ProgressBar pb;
@@ -63,15 +64,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Toolbar toolbar= findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         mTextMessage = (TextView) findViewById(R.id.message);
         fragmentManager=getSupportFragmentManager();
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+      //  BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+     //   navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         latitude=getIntent().getExtras().getDouble("latitude",36.0);
         longitude=getIntent().getExtras().getDouble("longitude",54.04);
        // Toast.makeText(this,latitude+"E"+longitude+"N",Toast.LENGTH_SHORT).show();
-       pb=findViewById(R.id.loading_spinner);
+       pb= (ProgressBar) findViewById(R.id.loading_spinner);
        getCats();
     }
 
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         ccall.enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-
+                if(response.isSuccessful()){
                 CATS.clear();
                 for(int i=0;i<response.body().size();i++){
                    CATS.add(response.body().get(i));
@@ -107,7 +109,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,response.body().toString(),Toast.LENGTH_SHORT).show();
                 pb.setVisibility(View.GONE);
                 CatsFragment ctfr=new CatsFragment();
-                chaneFrag(ctfr);
+                chaneFrag(ctfr);}else {
+                    Toast.makeText(MainActivity.this,response.message(),Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
